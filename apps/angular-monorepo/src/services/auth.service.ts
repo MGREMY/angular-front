@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from 'apps/angular-monorepo/config/auth-code-flow.config';
@@ -27,6 +28,10 @@ export class AuthService {
   constructor() {
     this.oAuthService.configure(authCodeFlowConfig);
     this.oAuthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  public get accessTokenHeader(): string {
+    return `Bearer ${this.accessToken}`;
   }
 
   public get accessToken() {
