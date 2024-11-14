@@ -6,6 +6,14 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { OAuthStorage, provideOAuthClient } from 'angular-oauth2-oidc';
 import { CookieOAuthStorageService } from '../services/auth.service';
+import {
+  API_CONFIG_TOKEN,
+  apiConfig,
+} from 'apps/angular-monorepo/config/api.config';
+import {
+  AUTH_CODE_FLOW_CONFIG_TOKEN,
+  authCodeFlowConfig,
+} from 'apps/angular-monorepo/config/auth-code-flow.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +26,14 @@ export const appConfig: ApplicationConfig = {
     {
       provide: OAuthStorage,
       useClass: CookieOAuthStorageService,
+    },
+    {
+      provide: API_CONFIG_TOKEN,
+      useValue: apiConfig,
+    },
+    {
+      provide: AUTH_CODE_FLOW_CONFIG_TOKEN,
+      useValue: authCodeFlowConfig,
     },
   ],
 };

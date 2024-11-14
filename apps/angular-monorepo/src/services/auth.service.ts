@@ -1,7 +1,6 @@
-import { HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from 'apps/angular-monorepo/config/auth-code-flow.config';
+import { AUTH_CODE_FLOW_CONFIG_TOKEN } from '../../config/auth-code-flow.config';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
@@ -24,18 +23,19 @@ export class CookieOAuthStorageService implements OAuthStorage {
 })
 export class AuthService {
   private readonly oAuthService = inject(OAuthService);
+  private readonly authCodeFlowConfig = inject(AUTH_CODE_FLOW_CONFIG_TOKEN);
 
   constructor() {
-    this.oAuthService.configure(authCodeFlowConfig);
+    this.oAuthService.configure(this.authCodeFlowConfig);
     this.oAuthService.loadDiscoveryDocumentAndTryLogin();
-  }
-
-  public get accessTokenHeader(): string {
-    return `Bearer ${this.accessToken}`;
   }
 
   public get accessToken() {
     return this.oAuthService.getAccessToken();
+  }
+
+  public get refreshToken() {
+    return this.oAuthService.getRefreshToken();
   }
 
   public login(): void {

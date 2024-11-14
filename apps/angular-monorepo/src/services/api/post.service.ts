@@ -1,24 +1,36 @@
 import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { PostGetAllResponse } from '../../models/post/post-get-all-response';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { API_CONFIG_TOKEN } from '../../../config/api.config';
+import { ApiRequest } from '../../models/api-request';
+import { PostPostRequest } from '../../models/post/post-post.request';
+import { setDefaultHeaders } from '../../helpers/fetch.headers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
-  protected readonly http = inject(HttpClient);
+  protected readonly apiUri = `${inject(API_CONFIG_TOKEN).apiUri}/post`;
+
   protected readonly authService = inject(AuthService);
 
-  public getAll(): Observable<PostGetAllResponse[]> {
-    const apiUri = 'http://localhost:5000';
-
-    return this.http.get<PostGetAllResponse[]>(`${apiUri}/api/post`, {
-      headers: {
-        Authorization: this.authService.accessTokenHeader,
-        'Content-Type': 'application/json',
+  public get getAllRequest(): ApiRequest {
+    return {
+      uri: `${this.apiUri}`,
+      request: {
+        method: 'GET',
+        headers: setDefaultHeaders(this.authService),
       },
-    });
+    };
+  }
+
+  public PostRequest(body: PostPostRequest): ApiRequest {
+    return {
+      uri: `${this.apiUri}`,
+      request: {
+        method: 'POST',
+        headers: setDefaultHeaders(this.authService),
+        body: JSON.stringify(body),
+      },
+    };
   }
 }

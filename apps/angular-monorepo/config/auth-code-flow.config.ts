@@ -1,4 +1,9 @@
+import { InjectionToken } from '@angular/core';
 import { AuthConfig } from 'angular-oauth2-oidc';
+
+export const AUTH_CODE_FLOW_CONFIG_TOKEN = new InjectionToken<AuthConfig>(
+  'AUTH_CODE_FLOW_CONFIG_TOKEN'
+);
 
 export const authCodeFlowConfig: AuthConfig = {
   issuer: process.env['APP_AUTH_ISSUER'],
