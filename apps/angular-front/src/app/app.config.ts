@@ -9,11 +9,11 @@ import { CookieOAuthStorageService } from '../services/auth.service';
 import {
   API_CONFIG_TOKEN,
   apiConfig,
-} from 'apps/angular-monorepo/config/api.config';
+} from 'apps/angular-front/config/api.config';
 import {
   AUTH_CODE_FLOW_CONFIG_TOKEN,
   authCodeFlowConfig,
-} from 'apps/angular-monorepo/config/auth-code-flow.config';
+} from 'apps/angular-front/config/auth-code-flow.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [

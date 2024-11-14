@@ -11,7 +11,7 @@ import { PostPostResponse } from '../../models/post/post-post.response';
   selector: 'app-home',
   imports: [ButtonComponent],
   template: `
-    <h1>ANGULAR-MONOREPO DEMO</h1>
+    <h1>angular-front DEMO</h1>
     <flowbite-button (click)="authService.login()">Login</flowbite-button>
     <flowbite-button (click)="authService.logout()">Logout</flowbite-button>
     <flowbite-button (click)="loadPosts()">Load posts</flowbite-button>
