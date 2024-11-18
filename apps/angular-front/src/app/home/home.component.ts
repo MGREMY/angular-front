@@ -2,9 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ButtonComponent } from 'flowbite-angular/button';
 import { AuthService } from '../../services/auth.service';
 import { PostService } from '../../services/api/post.service';
-import { PostGetAllResponse } from '../../models/post/post-get-all.response';
 import { arrayKeysToDate, keysToDate } from '../../helpers/date.converter';
-import { PostPostResponse } from '../../models/post/post-post.response';
+import { PostDto } from '../../models/dto/post.dto';
 
 @Component({
   standalone: true,
@@ -23,10 +22,10 @@ export class HomeComponent {
   protected readonly postService = inject(PostService);
 
   public async loadPosts(): Promise<void> {
-    const request = this.postService.getAllRequest;
+    const request = this.postService.getAllRequest();
 
     const response = await fetch(request.uri, request.request)
-      .then((value) => value.json() as Promise<PostGetAllResponse[]>)
+      .then((value) => value.json() as Promise<PostDto[]>)
       .then((value) => arrayKeysToDate(value, 'createdAtUtc'));
 
     console.group();
@@ -44,13 +43,13 @@ export class HomeComponent {
   }
 
   public async postPost(): Promise<void> {
-    const request = this.postService.PostRequest({
+    const request = this.postService.postRequest({
       title: 'test post',
       content: 'test post content',
     });
 
     const response = await fetch(request.uri, request.request)
-      .then((value) => value.json() as Promise<PostPostResponse>)
+      .then((value) => value.json() as Promise<PostDto>)
       .then((value) => keysToDate(value, 'createdAtUtc'));
 
     console.group('postId', response.postId);

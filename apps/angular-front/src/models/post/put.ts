@@ -1,4 +1,4 @@
-export interface PostGetAllResponse {
+export interface PostPutRequest {
   postId: string;
   title: string;
   content: string;

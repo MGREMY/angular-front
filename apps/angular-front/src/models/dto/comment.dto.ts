@@ -1,6 +1,6 @@
-export interface PostPostResponse {
+export interface CommentDto {
+  commentId: string;
   postId: string;
-  title: string;
   content: string;
   createdUserEmail: string;
   createdAtUtc: Date;
