@@ -7,14 +7,13 @@ import {
 } from 'flowbite-angular/navbar';
 
 @Component({
-  standalone: true,
-  imports: [
-    NavbarComponent,
-    NavbarBrandComponent,
-    NavbarContentComponent,
-    RouterOutlet,
-  ],
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+    imports: [
+        NavbarComponent,
+        NavbarBrandComponent,
+        NavbarContentComponent,
+        RouterOutlet,
+    ],
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
 export class AppComponent {}

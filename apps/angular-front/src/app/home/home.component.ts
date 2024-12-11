@@ -6,16 +6,15 @@ import { arrayKeysToDate, keysToDate } from '../../helpers/date.converter';
 import { PostDto } from '../../models/dto/post.dto';
 
 @Component({
-  standalone: true,
-  selector: 'app-home',
-  imports: [ButtonComponent],
-  template: `
+    selector: 'app-home',
+    imports: [ButtonComponent],
+    template: `
     <h1>angular-front DEMO</h1>
     <flowbite-button (click)="authService.login()">Login</flowbite-button>
     <flowbite-button (click)="authService.logout()">Logout</flowbite-button>
     <flowbite-button (click)="loadPosts()">Load posts</flowbite-button>
     <flowbite-button (click)="postPost()">Post posts</flowbite-button>
-  `,
+  `
 })
 export class HomeComponent {
   protected readonly authService = inject(AuthService);
