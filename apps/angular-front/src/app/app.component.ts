@@ -4,6 +4,7 @@ import {
   NavbarBrandComponent,
   NavbarComponent,
   NavbarContentComponent,
+  NavbarIconButtonComponent,
   NavbarItemComponent,
 } from 'flowbite-angular/navbar';
 import { DarkThemeToggleComponent } from 'flowbite-angular/dark-theme-toggle';
@@ -19,6 +20,7 @@ import { AuthService } from '../services/auth.service';
     NavbarBrandComponent,
     NavbarContentComponent,
     NavbarItemComponent,
+    NavbarIconButtonComponent,
     DarkThemeToggleComponent,
     IconComponent,
     FlowbiteRouterLinkDirective,
