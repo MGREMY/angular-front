@@ -1,10 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { API_CONFIG_TOKEN } from '../../../config/api.config';
-import { ApiRequest } from '../../models/api-request';
-import { PostPostRequest } from '../../models/post/post';
-import { PostPutRequest } from '../../models/post/put';
-import { PostPostCommentRequest } from '../../models/post/post-comment';
 import { ApiService } from '../api.service';
+import {
+  defaultPagedRequest,
+  PagedRequest,
+} from './models/paged-request.model';
+import { Post_PostRequest } from './models/Post/post.request';
+import { Post_PutRequest } from './models/Post/put.request';
+import { Post_PostCommentRequest } from './models/Post/post-comment.request';
 
 @Injectable({
   providedIn: 'root',
@@ -13,69 +16,49 @@ export class PostService {
   protected readonly apiService = inject(ApiService);
   protected readonly apiUri = `${inject(API_CONFIG_TOKEN).apiUri}/post`;
 
-  public getAllRequest(): ApiRequest {
-    return {
-      uri: this.apiUri,
-      request: {
-        ...this.apiService.init('GET'),
-      },
-    };
+  public getAllPost(pagination: PagedRequest = defaultPagedRequest) {
+    return fetch(
+      `${this.apiUri}?pageNumber=${pagination.pageNumber}&pageSize=${pagination.pageSize}`,
+      this.apiService.init('GET')
+    );
   }
 
-  public getRequest(postId: string): ApiRequest {
-    return {
-      uri: `${this.apiUri}/${postId}`,
-      request: {
-        ...this.apiService.init('GET'),
-      },
-    };
+  public getPost(postId: string) {
+    return fetch(
+      `${this.apiUri}/postId=${postId}`,
+      this.apiService.init('GET')
+    );
   }
 
-  public postRequest(body: PostPostRequest): ApiRequest {
-    return {
-      uri: this.apiUri,
-      request: {
-        ...this.apiService.initWithBody('POST', body),
-      },
-    };
+  public createPost(request: Post_PostRequest) {
+    return fetch(this.apiUri, this.apiService.initWithBody('POST', request));
   }
 
-  public putRequest(postId: string, body: PostPutRequest): ApiRequest {
-    return {
-      uri: `${this.apiUri}/${postId}`,
-      request: {
-        ...this.apiService.initWithBody('PUT', body),
-      },
-    };
+  public updatePost(postId: string, request: Post_PutRequest) {
+    return fetch(
+      `${this.apiUri}/postId=${postId}`,
+      this.apiService.initWithBody('PUT', request)
+    );
   }
 
-  public deleteRequest(postId: string): ApiRequest {
-    return {
-      uri: `${this.apiUri}/${postId}`,
-      request: {
-        ...this.apiService.init('DELETE'),
-      },
-    };
+  public deletePost(postId: string) {
+    return fetch(
+      `${this.apiUri}/postId=${postId}`,
+      this.apiService.init('DELETE')
+    );
   }
 
-  public getCommentsRequest(postId: string): ApiRequest {
-    return {
-      uri: `${this.apiUri}/${postId}/comments`,
-      request: {
-        ...this.apiService.init('GET'),
-      },
-    };
+  public getAllComments(postId: string) {
+    return fetch(
+      `${this.apiUri}/postId=${postId}/comments`,
+      this.apiService.init('GET')
+    );
   }
 
-  public postCommentRequest(
-    postId: string,
-    body: PostPostCommentRequest
-  ): ApiRequest {
-    return {
-      uri: `${this.apiUri}/${postId}/comment`,
-      request: {
-        ...this.apiService.initWithBody('POST', body),
-      },
-    };
+  public postComment(postId: string, request: Post_PostCommentRequest) {
+    return fetch(
+      `${this.apiUri}/postId=${postId}/comments`,
+      this.apiService.initWithBody('POST', request)
+    );
   }
 }

@@ -1,5 +1,3 @@
-import { CommentDto } from './comment.dto';
-
 export interface PostDto {
   postId: string;
   title: string;
@@ -7,8 +5,4 @@ export interface PostDto {
   createdUserEmail: string;
   createdAtUtc: Date;
   hasBeenModified: boolean;
-}
-
-export interface ExtendedPostDto extends PostDto {
-  comments: CommentDto[];
 }

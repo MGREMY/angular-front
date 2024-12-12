@@ -1,9 +1,19 @@
 <flowbite-navbar [isFixed]="true">
   <flowbite-navbar-content>
-    <flowbite-navbar-brand>Angular monorepo</flowbite-navbar-brand>
+    <flowbite-navbar-brand flowbiteRouterLink routerLink="/">
+      <flowbite-icon
+        class="h-8"
+        svgIcon="flowbite-angular-logo"
+        alt="Flowbite Logo" />
+      <span
+        class="hidden xl:block self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+        Angular monorepo
+      </span>
+    </flowbite-navbar-brand>
   </flowbite-navbar-content>
+  <flowbite-dark-theme-toggle />
 </flowbite-navbar>
 
-<div class="my-2 lg:mx-48 mx-auto h-dvh">
+<div class="pt-20 pb-2 lg:px-48 mx-auto bg-slate-50/50 dark:bg-slate-900/85">
   <router-outlet />
 </div>

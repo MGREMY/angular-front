@@ -1,4 +1,4 @@
-export interface PostPostRequest {
+export interface Post_PutRequest {
   title: string;
   content: string;
 }
