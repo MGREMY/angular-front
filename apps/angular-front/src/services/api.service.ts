@@ -9,32 +9,38 @@ type RequestMethods = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export class ApiService {
   public readonly authService = inject(AuthService);
 
-  public init(requestMethod: RequestMethods): RequestInit {
+  public init(
+    requestMethod: RequestMethods,
+    abortSignal?: AbortSignal
+  ): RequestInit {
     return {
       method: requestMethod,
       headers: {
         Authorization: `Bearer ${this.authService.accessToken}`,
         'Content-Type': 'application/json',
       },
+      signal: abortSignal,
     };
   }
 
   public initWithJsonBody(
     requestMethod: RequestMethods,
-    body: string
+    body: string,
+    abortSignal?: AbortSignal
   ): RequestInit {
     return {
-      ...this.init(requestMethod),
+      ...this.init(requestMethod, abortSignal),
       body: body,
     };
   }
 
   public initCustomContentType(
     requestMethod: RequestMethods,
-    contentType: string
+    contentType: string,
+    abortSignal?: AbortSignal
   ): RequestInit {
     return {
-      ...this.init(requestMethod),
+      ...this.init(requestMethod, abortSignal),
       headers: {
         'Content-Type': contentType,
       },
@@ -43,8 +49,13 @@ export class ApiService {
 
   public initWithBody(
     requestMethod: RequestMethods,
-    body: unknown
+    body: unknown,
+    abortSignal?: AbortSignal
   ): RequestInit {
-    return this.initWithJsonBody(requestMethod, JSON.stringify(body));
+    return this.initWithJsonBody(
+      requestMethod,
+      JSON.stringify(body),
+      abortSignal
+    );
   }
 }

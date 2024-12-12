@@ -45,4 +45,12 @@ export class AuthService {
   public logout(): void {
     this.oAuthService.revokeTokenAndLogout();
   }
+
+  public hasValidAccessToken(): boolean {
+    return this.oAuthService.hasValidAccessToken();
+  }
+
+  public canActivateProtectedRoute(): boolean {
+    return this.oAuthService.hasValidAccessToken();
+  }
 }

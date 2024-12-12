@@ -5,9 +5,13 @@ import {
   defaultPagedRequest,
   PagedRequest,
 } from './models/paged-request.model';
-import { Post_PostRequest } from './models/Post/post.request';
-import { Post_PutRequest } from './models/Post/put.request';
-import { Post_PostCommentRequest } from './models/Post/post-comment.request';
+import { Post_PostRequest } from './models/post/post.request';
+import { Post_PutRequest } from './models/post/put.request';
+import { Post_PostCommentRequest } from './models/post/post-comment.request';
+import { PagedResponse } from './models/paged-response.model';
+import { PostDto } from './models/post.dto';
+import { arrayKeysToDate, keysToDate } from '../../helpers/date.converter';
+import { CommentDto } from './models/comment.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,29 +20,39 @@ export class PostService {
   protected readonly apiService = inject(ApiService);
   protected readonly apiUri = `${inject(API_CONFIG_TOKEN).apiUri}/post`;
 
-  public getAllPost(pagination: PagedRequest = defaultPagedRequest) {
+  public getAllPost(
+    pagination: PagedRequest = defaultPagedRequest,
+    abortSignal?: AbortSignal
+  ) {
     return fetch(
       `${this.apiUri}?pageNumber=${pagination.pageNumber}&pageSize=${pagination.pageSize}`,
-      this.apiService.init('GET')
-    );
+      this.apiService.init('GET', abortSignal)
+    )
+      .then((response) => response.json() as Promise<PagedResponse<PostDto>>)
+      .then((pagedResponse) =>
+        arrayKeysToDate(pagedResponse.data, 'createdAtUtc')
+      );
   }
 
   public getPost(postId: string) {
-    return fetch(
-      `${this.apiUri}/postId=${postId}`,
-      this.apiService.init('GET')
-    );
+    return fetch(`${this.apiUri}/postId=${postId}`, this.apiService.init('GET'))
+      .then((response) => response.json() as Promise<PostDto>)
+      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
   }
 
   public createPost(request: Post_PostRequest) {
-    return fetch(this.apiUri, this.apiService.initWithBody('POST', request));
+    return fetch(this.apiUri, this.apiService.initWithBody('POST', request))
+      .then((response) => response.json() as Promise<PostDto>)
+      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
   }
 
   public updatePost(postId: string, request: Post_PutRequest) {
     return fetch(
       `${this.apiUri}/postId=${postId}`,
       this.apiService.initWithBody('PUT', request)
-    );
+    )
+      .then((response) => response.json() as Promise<PostDto>)
+      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
   }
 
   public deletePost(postId: string) {
@@ -52,13 +66,17 @@ export class PostService {
     return fetch(
       `${this.apiUri}/postId=${postId}/comments`,
       this.apiService.init('GET')
-    );
+    )
+      .then((response) => response.json() as Promise<CommentDto[]>)
+      .then((commentDtos) => arrayKeysToDate(commentDtos, 'createdAtUtc'));
   }
 
   public postComment(postId: string, request: Post_PostCommentRequest) {
     return fetch(
       `${this.apiUri}/postId=${postId}/comments`,
       this.apiService.initWithBody('POST', request)
-    );
+    )
+      .then((response) => response.json() as Promise<CommentDto>)
+      .then((commentDto) => keysToDate(commentDto, 'createdAtUtc'));
   }
 }

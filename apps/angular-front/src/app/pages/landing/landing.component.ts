@@ -3,7 +3,7 @@ import { Component, resource } from '@angular/core';
 @Component({
   selector: 'app-landing',
   template: `
-    <div class="m-2 flex flex-col gap-6 text-black dark:text-white">
+    <div class="m-2 flex flex-col gap-6">
       <h1 class="text-4xl font-bold">Angular front</h1>
       <div class="flex flex-col gap-2">
         <h2 class="text-2xl font-bold">What is this project about ?</h2>
@@ -79,18 +79,26 @@ import { Component, resource } from '@angular/core';
               </caption>
               <thead class="bg-slate-200 dark:bg-gray-800">
                 <tr>
-                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Name</th>
-                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Version</th>
+                  <th
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                    Name
+                  </th>
+                  <th
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                    Version
+                  </th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 @for (item of dependenciesResource.value()?.dependencies; track
                 $index) {
                 <tr>
-                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                  <td
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[0] }}
                   </td>
-                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                  <td
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[1] }}
                   </td>
                 </tr>
@@ -104,18 +112,26 @@ import { Component, resource } from '@angular/core';
               </caption>
               <thead class="bg-slate-200 dark:bg-gray-800">
                 <tr>
-                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Name</th>
-                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Version</th>
+                  <th
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                    Name
+                  </th>
+                  <th
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                    Version
+                  </th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 @for (item of dependenciesResource.value()?.devDependencies;
                 track $index) {
                 <tr>
-                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                  <td
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[0] }}
                   </td>
-                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
+                  <td
+                    class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[1] }}
                   </td>
                 </tr>
