@@ -73,24 +73,24 @@ import { Component, resource } from '@angular/core';
           } @else if(dependenciesResource.value()) {
           <div class="flex flex-row gap-4">
             <table
-              class="table-auto basis-1/2 w-full h-fit border border-gray-300">
+              class="table-auto basis-1/2 w-full h-fit border border-gray-300 dark:border-gray-600">
               <caption class="caption-top font-bold">
                 Dependencies
               </caption>
-              <thead class="bg-slate-200">
+              <thead class="bg-slate-200 dark:bg-gray-800">
                 <tr>
-                  <th class="border border-gray-300 px-4 py-2">Name</th>
-                  <th class="border border-gray-300 px-4 py-2">Version</th>
+                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Name</th>
+                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Version</th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 @for (item of dependenciesResource.value()?.dependencies; track
                 $index) {
                 <tr>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[0] }}
                   </td>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[1] }}
                   </td>
                 </tr>
@@ -98,24 +98,24 @@ import { Component, resource } from '@angular/core';
               </tbody>
             </table>
             <table
-              class="table-auto basis-1/2 w-full h-fit border border-gray-300">
+              class="table-auto basis-1/2 w-full h-fit border border-gray-300 dark:border-gray-600">
               <caption class="caption-top font-bold">
                 DevDependencies
               </caption>
-              <thead class="bg-slate-200">
+              <thead class="bg-slate-200 dark:bg-gray-800">
                 <tr>
-                  <th class="border border-gray-300 px-4 py-2">Name</th>
-                  <th class="border border-gray-300 px-4 py-2">Version</th>
+                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Name</th>
+                  <th class="border border-gray-300 dark:border-gray-600 px-4 py-2">Version</th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 @for (item of dependenciesResource.value()?.devDependencies;
                 track $index) {
                 <tr>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[0] }}
                   </td>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">
                     {{ item[1] }}
                   </td>
                 </tr>
