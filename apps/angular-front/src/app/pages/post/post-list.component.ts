@@ -1,10 +1,10 @@
 import { Component, inject, resource } from '@angular/core';
 import { PostService } from '../../../services/api/post.service';
-import { PostListDetailsComponent } from './post-list-detail.component';
+import { PostDetailMinimizedComponent } from '../shared/components/post/post-detail-minimize.component';
 
 @Component({
   selector: 'app-post-list',
-  imports: [PostListDetailsComponent],
+  imports: [PostDetailMinimizedComponent],
   templateUrl: './post-list.component.html',
 })
 export class PostListComponent {

@@ -11,7 +11,10 @@
   } @else if (postListResource.hasValue()){
   <div class="flex flex-col gap-8">
     @for (post of postListResource.value(); track $index) {
-    <app-post-list-details [post]="post" />
+    <div
+      class="p-2 border border-gray-300 dark:border-gray-600 bg-slate-100 dark:bg-gray-800 rounded-xl">
+      <app-post-detail-minimized [post]="post" />
+    </div>
     }
   </div>
   }
