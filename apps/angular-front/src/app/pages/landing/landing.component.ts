@@ -1,7 +1,9 @@
 import { Component, resource } from '@angular/core';
+import { IconComponent } from 'flowbite-angular/icon';
 
 @Component({
   selector: 'app-landing',
+  imports: [IconComponent],
   template: `
     <div class="m-2 flex flex-col gap-6">
       <h1 class="text-4xl font-bold">Angular front</h1>
@@ -95,7 +97,14 @@ import { Component, resource } from '@angular/core';
                 <tr>
                   <td
                     class="border border-gray-300 dark:border-gray-600 px-4 py-2">
-                    {{ item[0] }}
+                    @let npmjsUri = 'https://www.npmjs.com/package/' + item[0] +
+                    '/v/' + item[1];
+                    <a class="inline-flex items-center gap-2" [href]="npmjsUri">
+                      {{ item[0] }}
+                      <flowbite-icon
+                        svgIcon="outline:link"
+                        class="w-4 h-4 block stroke-2" />
+                    </a>
                   </td>
                   <td
                     class="border border-gray-300 dark:border-gray-600 px-4 py-2">
@@ -128,7 +137,14 @@ import { Component, resource } from '@angular/core';
                 <tr>
                   <td
                     class="border border-gray-300 dark:border-gray-600 px-4 py-2">
-                    {{ item[0] }}
+                    @let npmjsUri = 'https://www.npmjs.com/package/' + item[0] +
+                    '/v/' + item[1];
+                    <a class="inline-flex items-center gap-2" [href]="npmjsUri">
+                      {{ item[0] }}
+                      <flowbite-icon
+                        svgIcon="outline:link"
+                        class="w-4 h-4 block stroke-2" />
+                    </a>
                   </td>
                   <td
                     class="border border-gray-300 dark:border-gray-600 px-4 py-2">

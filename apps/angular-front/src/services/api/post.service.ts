@@ -34,49 +34,70 @@ export class PostService {
       );
   }
 
-  public getPost(postId: string) {
-    return fetch(`${this.apiUri}/postId=${postId}`, this.apiService.init('GET'))
-      .then((response) => response.json() as Promise<PostDto>)
-      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
-  }
-
-  public createPost(request: Post_PostRequest) {
-    return fetch(this.apiUri, this.apiService.initWithBody('POST', request))
-      .then((response) => response.json() as Promise<PostDto>)
-      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
-  }
-
-  public updatePost(postId: string, request: Post_PutRequest) {
+  public getPost(postId: string, abortSignal?: AbortSignal) {
     return fetch(
-      `${this.apiUri}/postId=${postId}`,
-      this.apiService.initWithBody('PUT', request)
+      `${this.apiUri}/${postId}`,
+      this.apiService.init('GET', abortSignal)
     )
       .then((response) => response.json() as Promise<PostDto>)
       .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
   }
 
-  public deletePost(postId: string) {
+  public createPost(request: Post_PostRequest, abortSignal?: AbortSignal) {
     return fetch(
-      `${this.apiUri}/postId=${postId}`,
-      this.apiService.init('DELETE')
+      this.apiUri,
+      this.apiService.initWithBody('POST', request, abortSignal)
+    )
+      .then((response) => response.json() as Promise<PostDto>)
+      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
+  }
+
+  public updatePost(
+    postId: string,
+    request: Post_PutRequest,
+    abortSignal?: AbortSignal
+  ) {
+    return fetch(
+      `${this.apiUri}/${postId}`,
+      this.apiService.initWithBody('PUT', request, abortSignal)
+    )
+      .then((response) => response.json() as Promise<PostDto>)
+      .then((postDto) => keysToDate(postDto, 'createdAtUtc'));
+  }
+
+  public deletePost(postId: string, abortSignal?: AbortSignal) {
+    return fetch(
+      `${this.apiUri}/${postId}`,
+      this.apiService.init('DELETE', abortSignal)
     );
   }
 
-  public getAllComments(postId: string) {
+  public getAllComments(postId: string, abortSignal?: AbortSignal) {
     return fetch(
-      `${this.apiUri}/postId=${postId}/comments`,
-      this.apiService.init('GET')
+      `${this.apiUri}/${postId}/comments`,
+      this.apiService.init('GET', abortSignal)
     )
       .then((response) => response.json() as Promise<CommentDto[]>)
       .then((commentDtos) => arrayKeysToDate(commentDtos, 'createdAtUtc'));
   }
 
-  public postComment(postId: string, request: Post_PostCommentRequest) {
+  public postComment(
+    postId: string,
+    request: Post_PostCommentRequest,
+    abortSignal?: AbortSignal
+  ) {
     return fetch(
-      `${this.apiUri}/postId=${postId}/comments`,
-      this.apiService.initWithBody('POST', request)
+      `${this.apiUri}/${postId}/comments`,
+      this.apiService.initWithBody('POST', request, abortSignal)
     )
       .then((response) => response.json() as Promise<CommentDto>)
       .then((commentDto) => keysToDate(commentDto, 'createdAtUtc'));
+  }
+
+  public getCommentsCount(postId: string, abortSignal?: AbortSignal) {
+    return fetch(
+      `${this.apiUri}/${postId}/comments/count`,
+      this.apiService.init('GET', abortSignal)
+    ).then((response) => response.json() as Promise<number>);
   }
 }

@@ -15,10 +15,13 @@ export class CommentService {
   protected readonly apiService = inject(ApiService);
   protected readonly apiUri = `${inject(API_CONFIG_TOKEN).apiUri}/comment`;
 
-  public getAllComment(pagination: PagedRequest = defaultPagedRequest) {
+  public getAllComment(
+    pagination: PagedRequest = defaultPagedRequest,
+    abortSignal?: AbortSignal
+  ) {
     return fetch(
       `${this.apiUri}?pageNumber=${pagination.pageNumber}&pageSize=${pagination.pageSize}`,
-      this.apiService.init('GET')
+      this.apiService.init('GET', abortSignal)
     )
       .then((response) => response.json() as Promise<PagedResponse<CommentDto>>)
       .then((pagedResponse) =>
@@ -26,28 +29,32 @@ export class CommentService {
       );
   }
 
-  public getComment(commentId: string) {
+  public getComment(commentId: string, abortSignal?: AbortSignal) {
     return fetch(
-      `${this.apiUri}/commentId=${commentId}`,
-      this.apiService.init('GET')
+      `${this.apiUri}/${commentId}`,
+      this.apiService.init('GET', abortSignal)
     )
       .then((response) => response.json() as Promise<CommentDto>)
       .then((commentDto) => keysToDate(commentDto, 'createdAtUtc'));
   }
 
-  public updateComment(commentId: string, request: Comment_PutRequest) {
+  public updateComment(
+    commentId: string,
+    request: Comment_PutRequest,
+    abortSignal?: AbortSignal
+  ) {
     return fetch(
-      `${this.apiUri}/commentId=${commentId}`,
-      this.apiService.initWithBody('PUT', request)
+      `${this.apiUri}/${commentId}`,
+      this.apiService.initWithBody('PUT', request, abortSignal)
     )
       .then((response) => response.json() as Promise<CommentDto>)
       .then((commentDto) => keysToDate(commentDto, 'createdAtUtc'));
   }
 
-  public deleteComment(commentId: string) {
+  public deleteComment(commentId: string, abortSignal?: AbortSignal) {
     return fetch(
-      `${this.apiUri}/commentId=${commentId}`,
-      this.apiService.init('DELETE')
+      `${this.apiUri}/${commentId}`,
+      this.apiService.init('DELETE', abortSignal)
     );
   }
 }
