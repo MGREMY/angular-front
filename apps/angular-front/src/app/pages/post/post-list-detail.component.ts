@@ -3,17 +3,20 @@ import { Component, inject, model, resource } from '@angular/core';
 import { PostDto } from '../../../services/api/models/post.dto';
 import { PostService } from '../../../services/api/post.service';
 import { IconComponent } from 'flowbite-angular/icon';
+import { RouterLink } from '@angular/router';
+import { TruncatePipeTransform } from '../shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-post-list-details',
-  imports: [DatePipe, IconComponent],
+  imports: [DatePipe, TruncatePipeTransform, IconComponent, RouterLink],
   template: `
-    <div class="p-2 border border-gray-300 dark:border-gray-600 bg-slate-100 dark:bg-gray-800 rounded-xl">
+    <div
+      class="p-2 border border-gray-300 dark:border-gray-600 bg-slate-100 dark:bg-gray-800 rounded-xl">
       <div class="flex flex-col m-2">
         <div class="flex flex-col md:flex-row justify-between pb-4 md:gap-2">
-          <p class="text-2xl font-bold">
+          <a [routerLink]="['./', post().postId]" class="text-2xl font-bold">
             {{ post().title }}
-          </p>
+          </a>
           <div class="inline-flex items-center gap-2">
             <span>
               {{ post().createdUserEmail }}
@@ -26,7 +29,7 @@ import { IconComponent } from 'flowbite-angular/icon';
         </div>
         <div class="pb-8">
           <p>
-            {{ post().content }}
+            {{ post().content | truncatePipe }}
           </p>
         </div>
         <div class="flex flex-row justify-between">
