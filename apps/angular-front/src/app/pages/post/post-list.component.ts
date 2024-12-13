@@ -1,10 +1,12 @@
 import { Component, inject, resource } from '@angular/core';
 import { PostService } from '../../../services/api/post.service';
-import { PostDetailMinimizedComponent } from '../shared/components/post/post-detail-minimize.component';
+import { SharedPostDetailMinimizedComponent } from '../shared/components/post/shared.post-detail-minimize.component';
+import { SharedLoadingComponent } from "../shared/components/shared.loading.component";
+import { SharedErrorComponent } from "../shared/components/shared.error.component";
 
 @Component({
   selector: 'app-post-list',
-  imports: [PostDetailMinimizedComponent],
+  imports: [SharedPostDetailMinimizedComponent, SharedLoadingComponent, SharedErrorComponent],
   templateUrl: './post-list.component.html',
 })
 export class PostListComponent {

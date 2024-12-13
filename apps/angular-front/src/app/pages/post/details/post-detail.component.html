@@ -1,0 +1,18 @@
+<div class="flex flex-col place-content-center mx-4 md:mx-8 xl:mx-24">
+  @if (postResource.isLoading()){
+  <app-shared-loading />
+  } @else if (postResource.error()){
+  <app-shared-error [resource]="postResource" />
+  } @else if(postResource.hasValue()){
+  <div
+    class="p-2 border border-gray-300 dark:border-gray-600 bg-slate-100 dark:bg-gray-800 rounded-xl">
+    <app-shared-post-detail [post]="postResource.value()!" />
+  </div>
+  } @if(commentsResource.isLoading()){
+  <app-shared-loading />
+  } @else if (commentsResource.error()){
+  <app-shared-error [resource]="commentsResource" />
+  } @else if (commentsResource.hasValue()){
+
+   }
+</div>

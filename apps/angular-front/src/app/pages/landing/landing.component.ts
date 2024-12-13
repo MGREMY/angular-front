@@ -1,9 +1,10 @@
 import { Component, resource } from '@angular/core';
 import { IconComponent } from 'flowbite-angular/icon';
+import { SharedErrorComponent } from '../shared/components/shared.error.component';
 
 @Component({
   selector: 'app-landing',
-  imports: [IconComponent],
+  imports: [IconComponent, SharedErrorComponent],
   template: `
     <div class="m-2 flex flex-col gap-6">
       <h1 class="text-4xl font-bold">Angular front</h1>
@@ -69,9 +70,7 @@ import { IconComponent } from 'flowbite-angular/icon';
             </span>
           </div>
           } @else if(dependenciesResource.error()){
-          <p class="text-red-500 font-bold">
-            Error while fetching the github content url.
-          </p>
+          <app-shared-error [resource]="dependenciesResource" />
           } @else if(dependenciesResource.value()) {
           <div class="flex flex-row gap-4">
             <table

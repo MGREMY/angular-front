@@ -4,10 +4,10 @@ import { TruncatePipeTransform } from '../../pipes/truncate.pipe';
 import { IconComponent } from 'flowbite-angular/icon';
 import { RouterLink } from '@angular/router';
 import { PostDto } from '../../../../../services/api/models/post.dto';
-import { PostService } from '../../../../..//services/api/post.service';
+import { PostService } from '../../../../../services/api/post.service';
 
 @Component({
-  selector: 'app-post-detail-minimized',
+  selector: 'app-shared-post-detail-minimized',
   imports: [DatePipe, TruncatePipeTransform, IconComponent, RouterLink],
   template: `
     <div class="flex flex-col m-2">
@@ -46,12 +46,12 @@ import { PostService } from '../../../../..//services/api/post.service';
     </div>
   `,
 })
-export class PostDetailMinimizedComponent {
+export class SharedPostDetailMinimizedComponent {
   public readonly post = model.required<PostDto>();
 
   protected readonly postService = inject(PostService);
 
-  protected commentCount = resource({
+  protected readonly commentCount = resource({
     request: () => ({ postId: this.post().postId }),
     loader: ({ request, abortSignal }) =>
       this.postService.getCommentsCount(request.postId, abortSignal),
