@@ -20,7 +20,6 @@
     "flowbite-angular": "1.1.1",
     "ngx-cookie-service": "^18.0.0",
     "rxjs": "~7.8.0",
-    "tailwind-merge": "2.2.1",
     "zone.js": "0.15.0"
   },
   "devDependencies": {

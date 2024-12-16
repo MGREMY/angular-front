@@ -53,9 +53,6 @@ importers:
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1
-      tailwind-merge:
-        specifier: 2.2.1
-        version: 2.2.1
       zone.js:
         specifier: 0.15.0
         version: 0.15.0
