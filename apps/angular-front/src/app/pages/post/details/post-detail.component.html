@@ -8,11 +8,22 @@
     class="p-2 border border-gray-300 dark:border-gray-600 bg-slate-100 dark:bg-gray-800 rounded-xl">
     <app-shared-post-detail [post]="postResource.value()!" />
   </div>
-  } @if(commentsResource.isLoading()){
-  <app-shared-loading />
-  } @else if (commentsResource.error()){
-  <app-shared-error [resource]="commentsResource" />
-  } @else if (commentsResource.hasValue()){
-
-   }
+  }
+  <hr class="h-px my-8 bg-gray-300 border-0 dark:bg-gray-600" />
+  <div
+    class="p-2 border border-gray-300 dark:border-gray-600 bg-slate-100 dark:bg-gray-800 rounded-xl">
+    @if(commentsResource.isLoading()){
+    <app-shared-loading />
+    } @else if (commentsResource.error()){
+    <app-shared-error [resource]="commentsResource" />
+    } @else if (commentsResource.hasValue()){
+    <div class="divide-y divide-dashed">
+      @for (comment of commentsResource.value(); track $index) {
+      <div class="border-gray-300 dark:border-gray-600">
+        <app-shared-comment-detail [comment]="comment" />
+      </div>
+      }
+    </div>
+    }
+  </div>
 </div>

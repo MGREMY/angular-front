@@ -72,7 +72,7 @@ import { SharedErrorComponent } from '../shared/components/shared.error.componen
           } @else if(dependenciesResource.error()){
           <app-shared-error [resource]="dependenciesResource" />
           } @else if(dependenciesResource.value()) {
-          <div class="flex flex-row gap-4">
+          <div class="flex flex-col md:flex-row gap-4">
             <table
               class="table-auto basis-1/2 w-full h-fit border border-gray-300 dark:border-gray-600">
               <caption class="caption-top font-bold">

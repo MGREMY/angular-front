@@ -3,10 +3,11 @@ import { PostService } from '../../../../services/api/post.service';
 import { SharedPostDetailComponent } from '../../shared/components/post/shared.post-detail.component';
 import { SharedLoadingComponent } from "../../shared/components/shared.loading.component";
 import { SharedErrorComponent } from "../../shared/components/shared.error.component";
+import { SharedCommentDetailComponent } from "../../shared/components/comment/shared.comment-detail.component";
 
 @Component({
   selector: 'app-post-detail',
-  imports: [SharedPostDetailComponent, SharedLoadingComponent, SharedErrorComponent],
+  imports: [SharedPostDetailComponent, SharedLoadingComponent, SharedErrorComponent, SharedCommentDetailComponent],
   templateUrl: './post-detail.component.html',
 })
 export class PostDetailComponent {

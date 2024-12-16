@@ -1,20 +1,15 @@
-import { Component, model } from '@angular/core';
-import { PostDto } from '../../../../../services/api/models/post.dto';
 import { DatePipe } from '@angular/common';
+import { Component, model } from '@angular/core';
+import { CommentDto } from '../../../../../services/api/models/comment.dto';
 
 @Component({
-  selector: 'app-shared-post-detail',
+  selector: 'app-shared-comment-detail',
   imports: [DatePipe],
   template: `
     <div class="flex flex-col m-2">
-      <div class="flex flex-col md:flex-row justify-between pb-4 md:gap-2">
-        <p class="text-2xl font-bold">
-          {{ post().title }}
-        </p>
-      </div>
       <div class="pb-8">
         <p>
-          {{ post().content }}
+          {{ comment().content }}
         </p>
       </div>
       <div class="flex flex-row justify-between">
@@ -24,14 +19,14 @@ import { DatePipe } from '@angular/common';
             alt="user profile picture"
             class="w-12 h-12" />
           <span>
-            {{ post().createdUserEmail }}
+            {{ comment().createdUserEmail }}
           </span>
         </div>
         <div class="flex flex-col md:flex-row items-end">
           <span class="text-sm italic">
-            {{ post().createdAtUtc | date : 'medium' }}
+            {{ comment().createdAtUtc | date : 'medium' }}
           </span>
-          @if(post().hasBeenModified){
+          @if(comment().hasBeenModified){
           <span class="text-sm italic">modified</span>
           }
         </div>
@@ -39,6 +34,6 @@ import { DatePipe } from '@angular/common';
     </div>
   `,
 })
-export class SharedPostDetailComponent {
-  public post = model.required<PostDto>();
+export class SharedCommentDetailComponent {
+  public readonly comment = model.required<CommentDto>();
 }
